@@ -7,6 +7,7 @@ import {
 } from 'n8n-workflow';
 
 import Ajv, { type SchemaObject } from 'ajv';
+import addFormats from 'ajv-formats';
 
 export class JsonValidator implements INodeType {
 	description: INodeTypeDescription = {
@@ -44,6 +45,7 @@ export class JsonValidator implements INodeType {
 		 * Initiate AVJ
 		 */
 		const AJV = new Ajv();
+		addFormats(AJV);
 
 		// Get the JSON schema defined by the user
 		const scheme = this.getNodeParameter('scheme', 0, undefined, {
